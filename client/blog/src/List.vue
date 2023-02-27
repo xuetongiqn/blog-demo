@@ -1,12 +1,45 @@
 <script>
+import { get } from './utils/http';
 export default {
-  setup(props, ctx) {
-      return {}
+  data() {
+    return {
+      list: [],
+      hasMore: false,
+    }
   },
+  mounted() {
+    this.loadList();
+  },
+  methods: {
+    async loadList(id) {
+      const { ok, list, hasMore } = await get(`/api/list?id=${id||''}`)
+      if (ok) {
+        this.list = list
+        this.hasMore = hasMore
+      }
+    },
+    jump(id){
+      this.$router.push(`/detail/${id}`)
+    }
+  }
 }
 </script>
 
 
 <template>
-  <div>List</div>
+  <v-app class="pa-2">
+    <ul>
+      <li v-for="item in list" :key="item.id" @click="jump(item.id)">
+        <h3>{{ item.type }}/{{ item.author }}/{{ item.date }}</h3>
+        <div>{{ item.content.substr(0,50) }}</div>
+      </li>
+    </ul>
+    <v-row class="mt-5">
+    <v-btn block v-if="hasmore">
+      load more
+    </v-btn>
+  </v-row>
+  </v-app>
 </template>
+
+

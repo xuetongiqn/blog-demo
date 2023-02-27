@@ -7,5 +7,6 @@ export const list = async (ctx, next) => {
   ctx.body = {
     ok: true,
     list,
+    hasMore: list.length==20,
   };
 }

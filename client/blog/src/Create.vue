@@ -42,7 +42,6 @@ export default {
 
 <template>
   <v-app class="container">
-    <h1>Blog</h1>
     <div>* 必填</div>
     <v-form validate-on="onSubmit" @submit.prevent="onSubmit">
       <ol>
