@@ -12,14 +12,18 @@ export default {
   },
   methods: {
     async loadList(id) {
-      const { ok, list, hasMore } = await get(`/api/list?id=${id||''}`)
+      const { ok, list, hasMore } = await get(`/api/list?id=${id || ''}`)
       if (ok) {
-        this.list = list
+        this.list = this.list.concat(list)
         this.hasMore = hasMore
       }
     },
-    jump(id){
+    jump(id) {
       this.$router.push(`/detail/${id}`)
+    },
+    loadMore() {
+      const lastId = this.list[this.list.length-1].id;
+      this.loadList(lastId);
     }
   }
 }
@@ -31,14 +35,14 @@ export default {
     <ul>
       <li v-for="item in list" :key="item.id" @click="jump(item.id)">
         <h3>{{ item.type }}/{{ item.author }}/{{ item.date }}</h3>
-        <div>{{ item.content.substr(0,50) }}</div>
+        <div>{{ item.content.substr(0, 50) }}</div>
       </li>
     </ul>
     <v-row class="mt-5">
-    <v-btn block v-if="hasmore">
-      load more
-    </v-btn>
-  </v-row>
+      <v-btn block v-if="hasMore" @click="loadMore">
+        load more
+      </v-btn>
+    </v-row>
   </v-app>
 </template>
 
