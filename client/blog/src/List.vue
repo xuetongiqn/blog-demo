@@ -22,7 +22,7 @@ export default {
       this.$router.push(`/Detail/${id}`)
     },
     loadMore() {
-      const lastId = this.list[this.list.length-1].id;
+      const lastId = this.list[this.list.length - 1].id;
       this.loadList(lastId);
     }
   }
@@ -33,10 +33,12 @@ export default {
 <template>
   <v-app class="pa-2">
     <ul>
-      <li v-for="item in list" :key="item.id" @click="jump(item.id)">
-        <h3>{{ item.description }}</h3><span>{{ item.type }}|{{ item.author }}|{{ item.date }}</span>
-        <div>{{ item.content.substr(0, 50) }}</div>
-      </li>
+      <v-card v-for="item in list" :key="item.id" class="mt-2 pa-2">
+        <li @click="jump(item.id)">
+          <h3>{{ item.description }}</h3><span>{{ item.type }}|{{ item.author }}|{{ item.date }}</span>
+          <div>{{ item.content.substr(0, 50) }}</div>
+        </li>
+      </v-card>
     </ul>
     <v-row class="mt-5">
       <v-btn block v-if="hasMore" @click="loadMore">
