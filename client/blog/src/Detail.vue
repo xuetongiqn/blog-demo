@@ -17,7 +17,11 @@ export default {
       if (ok) {
         this.detail = detail
       }
-    }
+    },
+    edit() {
+      const {id} = this.$route.params;
+      this.$router.push(`/Edit/${id}`)
+    },
   }
 }
 </script>
@@ -29,5 +33,6 @@ export default {
     <div>
       {{ detail.content }}
     </div>
+    <v-btn class="mt-10" @click="edit">EDIT</v-btn>
   </v-app>
 </template>

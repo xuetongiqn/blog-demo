@@ -19,7 +19,7 @@ export default {
       }
     },
     jump(id) {
-      this.$router.push(`/detail/${id}`)
+      this.$router.push(`/Detail/${id}`)
     },
     loadMore() {
       const lastId = this.list[this.list.length-1].id;
