@@ -7,6 +7,7 @@ export default {
       contentType: '',
       typeText: '',
       date: '',
+      description:'',
       content: '',
       rules: {
         require: value => !!value || 'This field is required',
@@ -27,6 +28,7 @@ export default {
         author: this.author,
         type,
         date: this.date,
+        description: this.description,
         content: this.content,
       }, 'PATCH');
       if (result.ok) {
@@ -63,6 +65,10 @@ export default {
         </v-radio-group>
         <li>
           <v-text-field label="Create Date: *" placeholder="例如: 2019年1月7日" variant="underlined" v-model="date"
+            :rules="[rules.require]"></v-text-field>
+        </li>
+        <li>
+          <v-text-field label="Description" variant="underlined" v-model="description"
             :rules="[rules.require]"></v-text-field>
         </li>
         <li>

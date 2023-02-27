@@ -8,6 +8,7 @@ CREATE TABLE blog (
     author text,
     type text,
     date text,
+    description text,
     content text,
     createtime timestamp with time zone DEFAULT now(),
 );

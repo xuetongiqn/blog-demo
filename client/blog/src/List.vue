@@ -34,7 +34,7 @@ export default {
   <v-app class="pa-2">
     <ul>
       <li v-for="item in list" :key="item.id" @click="jump(item.id)">
-        <h3>{{ item.type }}/{{ item.author }}/{{ item.date }}</h3>
+        <h3>{{ item.description }}</h3><span>{{ item.type }}|{{ item.author }}|{{ item.date }}</span>
         <div>{{ item.content.substr(0, 50) }}</div>
       </li>
     </ul>
