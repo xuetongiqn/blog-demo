@@ -35,9 +35,9 @@ export default {
         this.date = detail.date
         this.description = detail.description
         this.content = detail.content
-        if(this.options.indexOf(detail.type)>-1){
+        if (this.options.indexOf(detail.type) > -1) {
           this.contentType = detail.type
-        }else{
+        } else {
           this.contentType = 'Other'
           this.typeText = detail.type
         }
@@ -54,14 +54,18 @@ export default {
       if (!validated.valid) return;
 
       const type = this.contentType == 'Other' ? this.typeText : this.contentType
-      const result = await post('/api/create', {
-        id: this.id,
+      const data = {
         author: this.author,
         type,
         date: this.date,
         description: this.description,
         content: this.content,
-      }, 'PATCH');
+      }
+      if(this.id) {
+        data.id = this.id;
+      }
+
+      const result = await post('/api/create', data, 'PATCH');
       if (result.ok) {
         alert(`${this.submitText}成功`);
         this.$router.push('/list')
